@@ -38,7 +38,7 @@ file = file.read()
 fileOutput = file.split(',')
 webOutput = []
 
-#finds all results with https in the string, and adds to list of outputs
+#finds all results with https in the string, and adds to list of outputs, will be replaced later to find ingredients
 for i in fileOutput:
     if "https" in i:
         webOutput.append(i)
