@@ -23,7 +23,7 @@ def requestRecipe(search, parameters = [], apiURL = ''):
     
 
 url = initializeAPI(app_id,app_key)
-file = requestRecipe('chicken', ['ingredientLines'], url)
+#requestRecipe('chicken', ['ingredientLines'], url)
 
 
 file = open('data.txt', 'rt')
