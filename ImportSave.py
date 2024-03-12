@@ -2,20 +2,30 @@ import requests
 import os
 
 #calling edamam api and saving the search results into "data.txt"
-'''
-url = "https://api.edamam.com/api/recipes/v2?type=public&app_id=b67d3b8c&app_key=0e985ceeeb7bcc4f7d5963fe118bf7e7"
-querystring = {"q":"chicken","random":"false", "field":["ingredients"],"count":1.0}
+app_key = '0e985ceeeb7bcc4f7d5963fe118bf7e7'
+app_id = 'b67d3b8c'
 
-response = requests.request("GET", url, params=querystring)
-#print(response.text)
+def initializeAPI(id,key):
+    url = ('https://api.edamam.com/api/recipes/v2?type=public&app_id={app_id}&app_key={app_key}').format(app_id = id,app_key = key)
+    return url
 
-with open('data.txt', 'w') as file:
-    file.write(response.text)
-file.close()
-'''
+def requestRecipe(search, parameters = [], apiURL = ''):
+    def writeResults(results, file = 'data.txt'):
+        with open(file, 'w') as f:
+            f.write(results)
+        f.close()
+    
+    query = {"q":search, "field":parameters}
+    queryResults = requests.request("GET", apiURL, params=query).text
 
-#opening "data.txt" refine outputs into usable dictionaries
-#'''
+    writeResults(queryResults)
+
+    
+
+url = initializeAPI(app_id,app_key)
+file = requestRecipe('chicken', ['ingredientLines'], url)
+
+
 file = open('data.txt', 'rt')
 
 file = file.read()
@@ -27,4 +37,3 @@ for i in fileOutput:
 
 for i in webOutput:
     print("\n"+i)
-#'''
